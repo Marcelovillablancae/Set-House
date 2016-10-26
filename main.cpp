@@ -1,30 +1,24 @@
-//Codigo en C++ "Esqueleto" del proyecto
-
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-          ////////////////////////////////////////////////////////////
-          /////                   Clase Ambiente                  ////
-          ////////////////////////////////////////////////////////////
-
 class Ambiente{
 public:
-    void setStatus(){
+    Ambiente(){
+        Bstatus=false;
+    }
+
+    void virtual setStatus(){
         Bstatus= !(Bstatus);
     }
     bool getStatus(){
         return Bstatus;
     }
 
-private:
-    bool Bstatus= false ;
+protected:
+    bool Bstatus;
 };
-
-          ////////////////////////////////////////////////////////////
-          /////                   Herencias Ambiente              ////
-          ////////////////////////////////////////////////////////////
 
 class Descanso : public Ambiente{
 public:
@@ -47,7 +41,13 @@ public:
         }
         if(ILightLevel>=0) ILightLevel = 0;
     }
-
+    void setStatus(){
+        Bstatus= !Bstatus;
+        if(Bstatus==true){
+            BLightstate=true;
+            ILightLevel=50;
+        }
+    }
 
 private:
     int ILightLevel;
@@ -64,11 +64,6 @@ public:
 private:
 };
 
-
-          ////////////////////////////////////////////////////////////
-          /////                   Clase Usuario                   ////
-          ////////////////////////////////////////////////////////////
-          
 
 class Usuario{
 public:
@@ -134,9 +129,6 @@ private:
     Ambiente *seguridad = new Seguridad;
 };
 
-          ////////////////////////////////////////////////////////////
-          /////              IMPLEMENTACION DE PRUEBA             ////
-          ////////////////////////////////////////////////////////////
 
 int main()
 {
