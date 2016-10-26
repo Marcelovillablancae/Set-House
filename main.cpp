@@ -8,6 +8,9 @@ public:
     Ambiente(){
         Bstatus=false;
     }
+    virtual ~Ambiente(){
+
+    }
 
     void virtual setStatus(){
         Bstatus= !(Bstatus);
@@ -56,6 +59,11 @@ private:
 
 class Dormir : public Ambiente{
 public:
+    Dormir(){
+    }
+    ~Dormir(){
+    }
+
     //Por Hacer
 private:
     //Por Hacer
@@ -63,6 +71,10 @@ private:
 
 class Seguridad : public Ambiente{
 public:
+    Seguridad(){
+    }
+    ~Seguridad(){
+    }
     //Por Hacer
 private:
     //Por Hacer
