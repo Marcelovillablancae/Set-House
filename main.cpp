@@ -1,0 +1,153 @@
+//Codigo en C++ "Esqueleto" del proyecto
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+          ////////////////////////////////////////////////////////////
+          /////                   Clase Ambiente                  ////
+          ////////////////////////////////////////////////////////////
+
+class Ambiente{
+public:
+    void setStatus(){
+        Bstatus= !(Bstatus);
+    }
+    bool getStatus(){
+        return Bstatus;
+    }
+
+private:
+    bool Bstatus= false ;
+};
+
+          ////////////////////////////////////////////////////////////
+          /////                   Herencias Ambiente              ////
+          ////////////////////////////////////////////////////////////
+
+class Descanso : public Ambiente{
+public:
+    Descanso(){
+        ILightLevel=50;
+        BLightstate=false;
+    }
+    void TurnLight(){
+        BLightstate= !BLightstate;
+    }
+    void IncreaseLevel(){
+        if (ILightLevel<=90){
+            ILightLevel+=10;
+        }
+        if(ILightLevel>=100) ILightLevel = 100;
+    }
+    void DecreaseLevel(){
+        if (ILightLevel<=10){
+            ILightLevel+=10;
+        }
+        if(ILightLevel>=0) ILightLevel = 0;
+    }
+
+
+private:
+    int ILightLevel;
+    bool BLightstate;
+};
+
+class Dormir : public Ambiente{
+public:
+private:
+};
+
+class Seguridad : public Ambiente{
+public:
+private:
+};
+
+
+          ////////////////////////////////////////////////////////////
+          /////                   Clase Usuario                   ////
+          ////////////////////////////////////////////////////////////
+          
+
+class Usuario{
+public:
+    Usuario(){
+        Iedad=0;
+        Snombre="";
+        Susuario="";
+        Scontrasena="";
+        Snumero="";
+    }
+    Usuario(int Fedad,string Fnombre,string Fusuario,string Fcontrasena,string Fnumero){
+        Iedad=Fedad;
+        Snombre=Fnombre;
+        Susuario=Fusuario;
+        Scontrasena=Fcontrasena;
+        Snumero=Fnumero;
+    }
+    void setEdad(int Fedad){
+        Iedad=Fedad;
+    }
+    void setNombre(string Fnombre){
+         Susuario=Fnombre;
+    }
+    void setUsuario(string Fusuario){
+         Susuario=Fusuario;
+    }
+    void setContrasena(string Fcontrasena){
+         Susuario=Fcontrasena;
+    }
+    void TurnDescanso(){
+        descanso->setStatus();
+    }
+    void TurnDormir(){
+        dormir->setStatus();
+    }
+    void TurnSeguridad(){
+        seguridad->setStatus();
+    }
+    string getName(){
+        return Snombre;
+    }
+    int getEdad(){
+        return Iedad;
+    }
+    bool statusDescanso(){
+        return descanso->getStatus();
+    }
+    bool statusDormir(){
+        return dormir->getStatus();
+    }
+    bool statusSeguridad(){
+        return seguridad->getStatus();
+    }
+
+private:
+    int Iedad;
+    string Snombre;
+    string Susuario;
+    string Scontrasena;
+    string Snumero;
+    Ambiente *descanso = new Descanso;
+    Ambiente *dormir = new Dormir;
+    Ambiente *seguridad = new Seguridad;
+};
+
+          ////////////////////////////////////////////////////////////
+          /////              IMPLEMENTACION DE PRUEBA             ////
+          ////////////////////////////////////////////////////////////
+
+int main()
+{
+    Usuario *Marcelo= new Usuario(19,"Marcelo","Marcelox","TuPoto#123#","+56911111111");
+    Marcelo->TurnDescanso();
+    cout << Marcelo->getName() << " Tiene " << Marcelo->getEdad() << " años." << endl;
+    if(Marcelo->statusDescanso() == true) cout << "Esta descansando" << endl;
+    else cout <<"No esta descansando" << endl;
+    if(Marcelo->statusDormir() == true) cout << "Esta durmiendo" << endl;
+    else cout <<"No esta durmiendo" << endl;
+    if(Marcelo->statusSeguridad() == true) cout << "No esta en la casa" << endl;
+    else cout <<"Esta en la casa" << endl;
+    return 0;
+}
