@@ -56,12 +56,16 @@ private:
 
 class Dormir : public Ambiente{
 public:
+    //Por Hacer
 private:
+    //Por Hacer
 };
 
 class Seguridad : public Ambiente{
 public:
+    //Por Hacer
 private:
+    //Por Hacer
 };
 
 
@@ -80,6 +84,11 @@ public:
         Susuario=Fusuario;
         Scontrasena=Fcontrasena;
         Snumero=Fnumero;
+    }
+    ~Usuario(){
+        delete descanso;
+        delete dormir;
+        delete seguridad;
     }
     void setEdad(int Fedad){
         Iedad=Fedad;
@@ -118,7 +127,7 @@ public:
         return seguridad->getStatus();
     }
 
-private:
+protected:
     int Iedad;
     string Snombre;
     string Susuario;
